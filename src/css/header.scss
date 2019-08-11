@@ -1,0 +1,44 @@
+#menu {
+  width: 100%;
+	max-width: 1500px;
+	padding: 1em 2vw;
+  margin: 5vmin auto;
+
+  h1, a {
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 2.5rem;
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  img {
+    max-height: 50px;
+    vertical-align: top;
+  }
+
+  #top-menu {
+    /* height: 5vh; */
+    line-height: 50px;
+    top: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+  }
+
+  #menu-links {
+    a {
+      padding-left: 0.5em;
+    }
+  }
+
+  #name {
+    h1 {
+      display: inline;
+      line-height: 50px;
+    }
+  }
+
+}

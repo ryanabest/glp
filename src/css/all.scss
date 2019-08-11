@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500|Roboto+Mono:400,600,700');
+
+* {
+  box-sizing: border-box;
+  p, a {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+::selection {
+  background: #4295CE;
+  color: #fff;
+}
+
+body {
+  background-color: #fafafa;
+  color: #000;
+  margin: 0;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+
+  &:hover {
+    color: #4295CE;
+  }
+
+  &.active {
+    color: #4295CE;
+  }
+}
