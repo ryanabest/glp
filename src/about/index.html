@@ -5,14 +5,12 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!--[/htmlclean-protect]-->
-    <%- include('_partials/meta.html',{title:'ryan best'}) %>
+    <%- include('../_partials/meta.html') %>
   </head>
   <body>
-    <%- include('_partials/header.html',{logo: 'assets/logo.png', work: ' active', about:''}) %>
+    <%- include('../_partials/header.html',{logo: '../assets/logo.png', work: '', about:' active'}) %>
 
-    <%- include('_partials/project-grid.html') %>
-
-    <%- include('_partials/footer.html') %>
+    <%- include('../_partials/footer.html') %>
 
     <!--[htmlclean-protect]-->
     <!-- inject:js -->

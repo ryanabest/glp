@@ -1,0 +1,116 @@
+$stack-breakpoint: 800px;
+$cust-breakpoint: 900px;
+
+.row {
+  width: 100%;
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+
+  .column {
+    flex: 33%;
+    max-width: 33%;
+    padding: 0.5rem;
+    margin: auto;
+
+    @media screen and (max-width : $stack-breakpoint) {
+      flex: 100%;
+      max-width: 100%;
+      padding-bottom: 2em;
+    }
+
+    .project {
+      position: relative;
+      transition: background-color 250ms ease-in;
+
+      img {
+        width: 100%;
+        height: auto;
+        /* margin-top: 8px; */
+        vertical-align: middle;
+        box-shadow: 0 0 10px .1px rgba(78,78,78,0.05);
+        -moz-box-shadow:    0 0 10px .1px rgba(78,78,78,0.05);
+        -webkit-box-shadow: 0 0 10px .1px rgba(78,78,78,0.05);
+      }
+    }
+  }
+}
+
+.project-img-link {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.project-title {
+  display: none;
+  transition: display 250ms ease-in;
+  text-align: center;
+  position: absolute;
+  width: 90%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: #fff;
+
+  @media screen and (max-width : $stack-breakpoint) {
+    position: static;
+    display: block;
+    transform: none;
+    margin-bottom: 10px;
+
+    p {
+      color: #000;
+    }
+
+    h1 {
+      color: #000;
+      position: static;
+      transform: none;
+    }
+  }
+
+  p {
+    font-family: "Roboto Mono", monospace;
+    font-size: 1.6rem;
+    margin: 0 auto;
+
+    @media screen and (max-width : $cust-breakpoint) {
+        font-size: 1rem;
+      }
+  }
+
+  h1.eyebrow {
+    font-family: "Roboto Mono", monospace;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: translateY(-100%);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+
+    @media screen and (max-width : $cust-breakpoint) {
+        font-size: 0.5rem;
+      }
+  }
+}
+
+@media screen and (min-width : $stack-breakpoint) {
+  .project-img-link:hover {
+    opacity: 0.05;
+  }
+
+  .project:hover {
+    background-color: #4295CE;
+  }
+
+  .project:hover .project-title {
+    display: block;
+  }
+}

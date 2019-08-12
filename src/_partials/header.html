@@ -1,15 +1,12 @@
+<% var logo, work, about; %>
+
 <div id="menu">
   <div id="top-menu">
     <div id="name">
-      <a href="/">
-        <h1>ryan</h1>
-        <img src='assets/logo.png' className="logo" alt="logo" />
-        <h1>best</h1>
-      </a>
+      <a href="/"><h1>ryan</h1><img src='<%= logo %>' class="logo" alt="logo" /><h1>best</h1></a>
     </div>
     <div id="menu-links">
-      <a href="/" className="menu-link active">work</a>
-      <a href="/about" className="menu-link">about</a>
+      <a href="/" class="menu-link <%= work %>">work</a><a href="/about" class="menu-link <%= about %>">about</a>
     </div>
   </div>
 </div>

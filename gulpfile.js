@@ -1,18 +1,23 @@
 // https://hackernoon.com/how-to-automate-all-the-things-with-gulp-b21a3fc96885
+// https://medium.com/superhighfives/deploying-to-github-pages-with-gulp-c06efc527de8
 
 const gulp        = require('gulp');
+const fs          = require('fs-extra');
 const inject      = require('gulp-inject');
 const bs          = require('browser-sync').create();
 const htmlclean   = require('gulp-htmlclean');
 const cleanCSS    = require('gulp-clean-css');
 const concat      = require('gulp-concat');
-const uglify      = require('gulp-uglify');
+const terser      = require('gulp-terser');
 const del         = require('del');
 
 const sass        = require('gulp-sass');
 sass.compiler     = require('node-sass');
 const plugins     = require('gulp-load-plugins')();
 const config = {};
+
+const io          = require('indian-ocean');
+const spelunk     = require('spelunk');
 
 const ghPages = require('gulp-gh-pages');
 
@@ -22,17 +27,22 @@ var paths = {
   srcCSS: 'src/css/**/*.scss',
   srcJS: 'src/js/**/*.js',
   srcAssets: 'src/assets/**',
+  srcData: 'src/_data/**/*.json',
 
   tmp: 'tmp',
   tmpIndex: 'tmp/index.html',
+  tmpHTML: 'tmp/**/*.html',
   tmpCSS: 'tmp/**/*.css',
   tmpJS: 'tmp/**/*.js',
   tmpAssets: 'tmp/assets',
+  tmpData: 'tmp/_data/',
 
   dist: 'dist',
   distIndex: 'dist/index.html',
   distCSS: 'dist/**/*.css',
-  distJS: 'dist/**/*.js'
+  distJS: 'dist/**/*.js',
+  distAssets: 'dist/assets',
+  distData: 'dist/_data/'
 };
 
 gulp.task('html', function () {
@@ -57,12 +67,29 @@ gulp.task('assets', function() {
   return gulp.src(paths.srcAssets).pipe(gulp.dest(paths.tmpAssets));
 })
 
-gulp.task('copy', gulp.series('html', 'css', 'js', 'assets'));
+async function data() {
+  return fs
+    .exists('src/_data')
+    .then(() => {spelunk('src/_data')})
+    .then(cave => {
+      config.cave = cave;
+    })
+    .catch(error => errorMessage({title: 'Data Error', error}))
+}
+
+gulp.task('data', function () {
+  fs.exists('src/_data')
+  .then(config.data = spelunk.sync('src/_data'))
+
+  console.log(config);
+})
+
+gulp.task('copy', gulp.series('data', 'html', 'css', 'js', 'assets'));
 
 gulp.task('inject', gulp.series('copy', function () {
   var css = gulp.src(paths.tmpCSS);
   var js = gulp.src(paths.tmpJS);
-  return gulp.src(paths.tmpIndex)
+  return gulp.src(paths.tmpHTML)
     .pipe(inject( css, { relative:true } ))
     .pipe(inject( js, { relative:true } ))
     .pipe(gulp.dest(paths.tmp));
@@ -77,14 +104,16 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('watch', gulp.parallel('browser-sync', function() {
-  gulp.watch("src/*.html").on('change', gulp.series('inject',bs.reload));
-  gulp.watch("src/_partials/*.html").on('change', gulp.series('inject',bs.reload));
-  gulp.watch("src/css/*.scss").on('change', gulp.series('inject',bs.reload));
-  gulp.watch("src/js/**.js").on('change', gulp.series('inject',bs.reload));
+  gulp.watch("src/*.html").on('change', gulp.series('clean','inject',bs.reload));
+  gulp.watch("src/_partials/*.html").on('change', gulp.series('clean','inject',bs.reload));
+  gulp.watch("src/css/*.scss").on('change', gulp.series('clean','inject',bs.reload));
+  gulp.watch("src/js/**.js").on('change', gulp.series('clean','inject',bs.reload));
+  gulp.watch("src/_data/**.json").on('change', gulp.series('clean','inject',bs.reload));
 }));
 
 gulp.task('html:dist', function () {
   return gulp.src(paths.srcHTML)
+    .pipe(plugins.ejs(config))
     .pipe(htmlclean())
     .pipe(gulp.dest(paths.dist));
 });
@@ -92,6 +121,7 @@ gulp.task('html:dist', function () {
 gulp.task('css:dist', function () {
   return gulp.src(paths.srcCSS)
     .pipe(concat('style.min.css'))
+    .pipe(sass().on('error', sass.logError))
     .pipe(cleanCSS())
     .pipe(gulp.dest(paths.dist));
 });
@@ -99,11 +129,19 @@ gulp.task('css:dist', function () {
 gulp.task('js:dist', function () {
   return gulp.src(paths.srcJS)
     .pipe(concat('script.min.js'))
-    .pipe(uglify())
+    .pipe(terser())
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('copy:dist', gulp.series('html:dist', 'css:dist', 'js:dist'));
+gulp.task('assets:dist', function() {
+  return gulp.src(paths.srcAssets).pipe(gulp.dest(paths.distAssets));
+})
+
+gulp.task('data:dist', function() {
+  return gulp.src(paths.srcData).pipe(gulp.dest(paths.distData));
+})
+
+gulp.task('copy:dist', gulp.series('data:dist', 'html:dist', 'css:dist', 'js:dist', 'assets:dist'));
 
 gulp.task('inject:dist', gulp.series('copy:dist', function () {
   var css = gulp.src(paths.distCSS);

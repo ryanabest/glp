@@ -1,0 +1,10 @@
+<% var folder, url, eyebrow, title, external; %>
+<div class="column">
+  <div id="<%=folder%>" class="project">
+    <div class="project-title">
+      <h1 class="eyebrow">--<%=eyebrow%>--</h1>
+      <p><%=title%></p>
+      </div>
+      <a href="<%=url%>" <% if (external) { %> target="_blank" <% } %> class="project-img-link"><img alt="<%=title%>" src="/assets/work/<%=folder%>/assets/preview.png"/></a>
+  </div>
+</div>
