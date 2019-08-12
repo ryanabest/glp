@@ -67,24 +67,7 @@ gulp.task('assets', function() {
   return gulp.src(paths.srcAssets).pipe(gulp.dest(paths.tmpAssets));
 })
 
-async function data() {
-  return fs
-    .exists('src/_data')
-    .then(() => {spelunk('src/_data')})
-    .then(cave => {
-      config.cave = cave;
-    })
-    .catch(error => errorMessage({title: 'Data Error', error}))
-}
-
-gulp.task('data', function () {
-  fs.exists('src/_data')
-  .then(config.data = spelunk.sync('src/_data'))
-
-  console.log(config);
-})
-
-gulp.task('copy', gulp.series('data', 'html', 'css', 'js', 'assets'));
+gulp.task('copy', gulp.series('html', 'css', 'js', 'assets'));
 
 gulp.task('inject', gulp.series('copy', function () {
   var css = gulp.src(paths.tmpCSS);
@@ -137,11 +120,7 @@ gulp.task('assets:dist', function() {
   return gulp.src(paths.srcAssets).pipe(gulp.dest(paths.distAssets));
 })
 
-gulp.task('data:dist', function() {
-  return gulp.src(paths.srcData).pipe(gulp.dest(paths.distData));
-})
-
-gulp.task('copy:dist', gulp.series('data:dist', 'html:dist', 'css:dist', 'js:dist', 'assets:dist'));
+gulp.task('copy:dist', gulp.series('html:dist', 'css:dist', 'js:dist', 'assets:dist'));
 
 gulp.task('inject:dist', gulp.series('copy:dist', function () {
   var css = gulp.src(paths.distCSS);
@@ -154,10 +133,10 @@ gulp.task('inject:dist', gulp.series('copy:dist', function () {
 
 gulp.task('build', gulp.series('inject:dist'));
 
-gulp.task('deploy', function() {
+gulp.task('deploy', gulp.series('build',function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages());
-});
+}));
 
 gulp.task('clean', function () {
   return del([paths.tmp, paths.dist]);
