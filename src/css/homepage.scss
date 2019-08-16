@@ -1,4 +1,4 @@
-$stack-breakpoint: 800px;
+$stack-breakpoint: 700px;
 $cust-breakpoint: 900px;
 
 .row {
@@ -10,15 +10,39 @@ $cust-breakpoint: 900px;
   padding: 0 1rem;
 
   .column {
-    flex: 33%;
-    max-width: 33%;
+
     padding: 0.5rem;
     margin: auto;
+
+    &.column-3 {
+      flex: 33%;
+      max-width: 33%;
+    }
+
+    &.column-2 {
+      flex: 50%;
+      max-width: 50%;
+    }
+
+    &.column-1 {
+      flex: 75%;
+      max-width: 75%;
+    }
 
     @media screen and (max-width : $stack-breakpoint) {
       flex: 100%;
       max-width: 100%;
       padding-bottom: 2em;
+
+      &.column-3 {
+        flex: 100%;
+        max-width: 100%;
+      }
+
+      &.column-2 {
+        flex: 100%;
+        max-width: 100%;
+      }
     }
 
     .project {

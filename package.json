@@ -4,7 +4,9 @@
   "description": "portfolio gulp",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp clean && gulp inject && gulp watch",
+    "projects": "node src/ejs/projectRows.js",
+    "dev": "gulp clean && npm run projects && gulp inject && gulp watch",
+    "build": "gulp clean && npm run projects && gulp inject",
     "deploy": "gulp build && gulp deploy"
   },
   "repository": {
@@ -20,6 +22,7 @@
   "devDependencies": {
     "browser-sync": "^2.26.7",
     "del": "^5.0.0",
+    "ejs": "^2.6.2",
     "fs": "0.0.1-security",
     "fs-extra": "^8.1.0",
     "gulp": "^4.0.2",

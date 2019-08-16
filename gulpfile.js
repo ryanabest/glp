@@ -80,6 +80,7 @@ gulp.task('inject', gulp.series('copy', function () {
 
 gulp.task('browser-sync', function () {
   bs.init({
+    open: false,
     server: {
       baseDir: "./tmp/"
     }
@@ -87,11 +88,10 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('watch', gulp.parallel('browser-sync', function() {
-  gulp.watch("src/*.html").on('change', gulp.series('clean','inject',bs.reload));
-  gulp.watch("src/_partials/*.html").on('change', gulp.series('clean','inject',bs.reload));
-  gulp.watch("src/css/*.scss").on('change', gulp.series('clean','inject',bs.reload));
-  gulp.watch("src/js/**.js").on('change', gulp.series('clean','inject',bs.reload));
-  gulp.watch("src/_data/**.json").on('change', gulp.series('clean','inject',bs.reload));
+  gulp.watch("src/*.html").on('change', gulp.series('html',bs.reload));
+  gulp.watch("src/_partials/*.html").on('change', gulp.series('html',bs.reload));
+  gulp.watch("src/css/*.scss").on('change', gulp.series('css',bs.reload));
+  gulp.watch("src/js/**.js").on('change', gulp.series('js',bs.reload));
 }));
 
 gulp.task('html:dist', function () {
