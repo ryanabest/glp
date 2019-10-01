@@ -1,0 +1,17 @@
+{
+  "DrawingDiscrimination":[
+    {
+      "type": "content",
+      "children":[
+        {
+          "type": "h1",
+          "text": "Drawing Discrimination"
+        },
+        {
+          "type": "p",
+          "text": "This visualization explores redlining’s lasting impact on homeownership, home equity, and wealth building opportunities across New York City."
+        }
+      ]
+    }
+  ]
+}

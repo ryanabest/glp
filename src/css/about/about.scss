@@ -1,0 +1,40 @@
+.about-content {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 2em;
+  font-weight: 300;
+  margin: 0px auto 0px auto;
+}
+
+.about-content p {
+  font-size: 1.5rem;
+  line-height: 2em;
+
+  @media screen and (max-width : 600px) {
+      font-size: 1rem;
+    }
+}
+
+.about-content a, .project-content a, a.next-project-link, a.project-title-link {
+  padding-bottom: 0.15em;
+  padding-top: 0.15em;
+  background:
+     linear-gradient(
+       to bottom, #4295CE 0%,
+       #4295CE 100%
+     );
+  background-position: 0 100%;
+	background-repeat: repeat-x;
+	background-size: 0.12em 0.12em;
+  transition: all 200ms ease-in-out;
+}
+
+.about-content a:hover, .project-content a:hover, a.next-project-link:hover, a.project-title-link:hover {
+  color: #fff;
+  transition: all 200ms ease-in-out;
+  background-size: 100% 100%;
+}
+
+.bold {
+  font-weight: 700;
+}
