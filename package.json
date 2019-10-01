@@ -4,6 +4,7 @@
   "description": "portfolio gulp",
   "main": "index.js",
   "scripts": {
+    "aml": "gulp aml && node src/aml/archieml.js",
     "projects": "node src/ejs/projectRows.js",
     "dev": "gulp clean && npm run projects && gulp inject && gulp watch",
     "build": "gulp clean && npm run projects && gulp inject",
@@ -20,12 +21,14 @@
   },
   "homepage": "https://github.com/ryanabest/portfolio#readme",
   "devDependencies": {
+    "archieml": "^0.4.2",
     "browser-sync": "^2.26.7",
     "del": "^5.0.0",
     "ejs": "^2.6.2",
     "fs": "0.0.1-security",
     "fs-extra": "^8.1.0",
     "gulp": "^4.0.2",
+    "gulp-archieml": "^1.1.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-ejs": "^4.1.1",

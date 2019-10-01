@@ -15,11 +15,10 @@
   "row": 1
 },
 {
-  "folder": "BBG/ArgentinaElections",
-  "url": "https://www.bloomberg.com/graphics/2019-argentina-presidential-election-macri-fernandez/",
-  "eyebrow": "Bloomberg Graphics",
-  "title": "2019 Argentine Elections",
-  "external": true,
+  "folder": "DrawingDiscrimination",
+  "eyebrow": "Parsons Thesis",
+  "title": "Drawing Discrimination",
+  "external": false,
   "row": 1
 },
 {
@@ -27,6 +26,14 @@
   "url": "https://www.bloomberg.com/graphics/2019-g20-trade-war/",
   "eyebrow": "Bloomberg Graphics",
   "title": "Trade War Summit at G-20",
+  "external": true,
+  "row": 2
+},
+{
+  "folder": "BBG/ArgentinaElections",
+  "url": "https://www.bloomberg.com/graphics/2019-argentina-presidential-election-macri-fernandez/",
+  "eyebrow": "Bloomberg Graphics",
+  "title": "2019 Argentine Elections",
   "external": true,
   "row": 2
 },
@@ -44,7 +51,7 @@
   "eyebrow": "Bloomberg Graphics",
   "title": "Second 2020 Democratic Presidential Debate",
   "external": true,
-  "row": 2
+  "row": 3
 },
 {
   "folder": "BBG/CancerFunding",
@@ -63,72 +70,65 @@
   "row": 3
 },
 {
-  "folder": "DrawingDiscrimination",
-  "eyebrow": "Parsons Project",
-  "title": "Drawing Discrimination",
-  "external": true,
-  "row": 3
-},
-{
   "folder": "NYCRedliningPoster",
   "eyebrow": "Parsons Project",
   "title": "New York City Redlining Poster",
-  "external": true,
+  "external": false,
   "row": 4
 },
 {
   "folder": "samia.design",
-  "eyebrow": "Parsons Project",
+  "eyebrow": "Personal Project",
   "title": "samia.design",
-  "external": true,
+  "external": false,
   "row": 4
 },
 {
   "folder": "MigrationOfArt",
   "eyebrow": "Parsons Project",
   "title": "The Migration of Art",
-  "external": true,
+  "external": false,
   "row": 4
 },
 {
   "folder": "MindTheGap",
   "eyebrow": "Parsons Project",
   "title": "mind the gap.",
-  "external": true,
+  "external": false,
   "row": 5
 },
 {
   "folder": "HistoryOfCollecting",
   "eyebrow": "Parsons Project",
   "title": "A History of Collecting At The Met",
-  "external": true,
+  "external": false,
   "row": 5
 },
 {
   "folder": "SubDataDashboards",
   "eyebrow": "Client Work",
   "title": "Sub Data Dashboards",
-  "external": true,
+  "external": false,
   "row": 5
 },
 {
   "folder": "HowInsulatedAmI",
   "eyebrow": "Client Work",
   "title": "Real-Time Temperature Sensor",
-  "external": true,
+  "external": false,
   "row": 6
 },
 {
   "folder": "AlcoholicsAnonymousMeetingFinder",
   "eyebrow": "Client Work",
   "title": "Alcoholics Anonymous Meeting Finder",
-  "external": true,
+  "external": false,
   "row": 6
 },
 {
   "folder": "DiaryOfEnvy",
   "eyebrow": "Client Work",
   "title": "Diary of Envy",
-  "external": true,
+  "external": false,
   "row": 6
 }]

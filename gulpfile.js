@@ -10,6 +10,7 @@ const cleanCSS    = require('gulp-clean-css');
 const concat      = require('gulp-concat');
 const terser      = require('gulp-terser');
 const del         = require('del');
+const archieml    = require('gulp-archieml');
 
 const sass        = require('gulp-sass');
 sass.compiler     = require('node-sass');
@@ -24,7 +25,8 @@ const ghPages = require('gulp-gh-pages');
 var paths = {
   src: 'src/**/*',
   srcHTML: 'src/**/*.html',
-  srcCSS: 'src/css/**/*.scss',
+  srcCSS: 'src/css/*.scss',
+  srcAboutCSS: 'src/css/about/*.scss',
   srcJS: 'src/js/**/*.js',
   srcAssets: 'src/assets/**',
   srcData: 'src/_data/**/*.json',
@@ -32,14 +34,16 @@ var paths = {
   tmp: 'tmp',
   tmpIndex: 'tmp/index.html',
   tmpHTML: 'tmp/**/*.html',
-  tmpCSS: 'tmp/**/*.css',
+  tmpCSS: 'tmp/*.css',
   tmpJS: 'tmp/**/*.js',
   tmpAssets: 'tmp/assets',
   tmpData: 'tmp/_data/',
 
+  tmpAbout: 'tmp/about',
+
   dist: 'dist',
   distIndex: 'dist/index.html',
-  distCSS: 'dist/**/*.css',
+  distCSS: 'dist/*.css',
   distJS: 'dist/**/*.js',
   distAssets: 'dist/assets',
   distData: 'dist/_data/'
@@ -59,6 +63,13 @@ gulp.task('css', function () {
     .pipe(gulp.dest(paths.tmp));
 });
 
+gulp.task('aboutcss', function () {
+  return gulp
+    .src(paths.srcAboutCSS)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(paths.tmpAbout));
+});
+
 gulp.task('js', function () {
   return gulp.src(paths.srcJS).pipe(gulp.dest(paths.tmp));
 });
@@ -67,7 +78,7 @@ gulp.task('assets', function() {
   return gulp.src(paths.srcAssets).pipe(gulp.dest(paths.tmpAssets));
 })
 
-gulp.task('copy', gulp.series('html', 'css', 'js', 'assets'));
+gulp.task('copy', gulp.series('html', 'css', 'js', 'assets','aboutcss'));
 
 gulp.task('inject', gulp.series('copy', function () {
   var css = gulp.src(paths.tmpCSS);
@@ -88,10 +99,10 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('watch', gulp.parallel('browser-sync', function() {
-  gulp.watch("src/*.html").on('change', gulp.series('html',bs.reload));
-  gulp.watch("src/_partials/*.html").on('change', gulp.series('html',bs.reload));
-  gulp.watch("src/css/*.scss").on('change', gulp.series('css',bs.reload));
-  gulp.watch("src/js/**.js").on('change', gulp.series('js',bs.reload));
+  gulp.watch("src/*.html").on('change', gulp.series('html','inject',bs.reload));
+  gulp.watch("src/_partials/*.html").on('change', gulp.series('html','inject',bs.reload));
+  gulp.watch("src/css/*.scss").on('change', gulp.series('css','inject',bs.reload));
+  gulp.watch("src/js/**.js").on('change', gulp.series('js','inject',bs.reload));
 }));
 
 gulp.task('html:dist', function () {
@@ -141,3 +152,7 @@ gulp.task('deploy', gulp.series('build',function() {
 gulp.task('clean', function () {
   return del([paths.tmp, paths.dist]);
 });
+
+gulp.task('aml', () => gulp.src('src/aml/*.aml')
+  .pipe(archieml())
+  .pipe(gulp.dest('src/aml/json/')));
