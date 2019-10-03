@@ -42,7 +42,11 @@ var paths = {
   tmpAbout: 'tmp/about',
 
   dist: 'dist',
+  distWork: 'dist/work',
+  distWorkIndex: 'dist/work/**/index.html',
   distIndex: 'dist/index.html',
+  distAboutIndex: 'dist/about/*.html',
+  distAbout: 'dist/about',
   distCSS: 'dist/*.css',
   distJS: 'dist/**/*.js',
   distAssets: 'dist/assets',
@@ -142,7 +146,27 @@ gulp.task('inject:dist', gulp.series('copy:dist', function () {
     .pipe(gulp.dest(paths.dist));
 }));
 
-gulp.task('build', gulp.series('inject:dist'));
+gulp.task('inject:distAbout', gulp.series('copy:dist','inject:dist',function () {
+  var css = gulp.src(paths.distCSS);
+  var js = gulp.src(paths.distJS);
+  return gulp.src(paths.distAboutIndex)
+    .pipe(inject( css, { relative:true } ))
+    .pipe(inject( js, { relative:true } ))
+    .pipe(gulp.dest(paths.distAbout));
+}));
+
+gulp.task('inject:distWork', gulp.series('copy:dist','inject:dist', 'inject:distAbout', function () {
+  var css = gulp.src(paths.distCSS);
+  var js = gulp.src(paths.distJS);
+  return gulp.src(paths.distWorkIndex)
+    .pipe(inject( css, { relative:true } ))
+    .pipe(inject( js, { relative:true } ))
+    .pipe(gulp.dest(paths.distWork));
+}));
+
+gulp.task('inject:distAll', gulp.series('inject:distWork'));
+
+gulp.task('build', gulp.series('inject:distAll'));
 
 gulp.task('deploy', gulp.series('build',function() {
   return gulp.src('./dist/**/*')

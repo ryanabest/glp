@@ -6,8 +6,8 @@
   "scripts": {
     "aml": "gulp aml && node src/aml/archieml.js",
     "projects": "node src/ejs/projectRows.js",
-    "dev": "gulp clean && npm run projects && gulp inject && gulp watch",
-    "build": "gulp clean && npm run projects && gulp inject",
+    "dev": "gulp clean && npm run aml && npm run projects && gulp inject && gulp watch",
+    "build": "gulp clean && npm run aml && npm run projects && gulp inject",
     "deploy": "gulp build && gulp deploy"
   },
   "repository": {

@@ -35,17 +35,16 @@ fs.readdir(amlJSON, (err,files) => {
       <% }) %>
     `,{subtitle:projectAML.subtitle})
 
+    html += '</div>'
+
     projectAML.div.forEach(div => {
 
       if (div.type === 'video') {
-        div.content.forEach((content) => {
-
-          html += ejs.render(`
-            <div class="project-image">
-              <div class="video-wrapper"  style="padding:56.18% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/<%=video%>?autoplay=1&loop=1&autopause=0&title=0&byline=0&portrait=0&autopause=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="autoplay"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-            </div>
-          `,{video:content})
-        })
+        html += ejs.render(`
+          <div class="project-image">
+            <div class="video-wrapper"  style="padding:56.18% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/<%=video%>?autoplay=1&loop=1&autopause=0&title=0&byline=0&portrait=0&autopause=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="autoplay"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+          </div>
+        `,{video:div.video})
       }
 
       else if (div.type === 'image') {
@@ -53,9 +52,10 @@ fs.readdir(amlJSON, (err,files) => {
       }
 
       else if (div.type === 'content') {
+
         let id;
         div.id ? id=' id="'+div.id+'"' : id='';
-        html += '<div class="project-project-content"'+id+'>'
+        html += '<div class="project-content"'+id+'>'
         div.content.forEach((content) => {
           // console.log(content);
           if (content.type === 'project-link') {
@@ -67,13 +67,31 @@ fs.readdir(amlJSON, (err,files) => {
             `,{link:content.content})
           }
 
-          if (content.type === 'p') {
-            // console.log(content.content);
+          // if (content.type === 'p') {
+          //   // console.log(content.content);
+          //   html += ejs.render(`
+          //     <% p.forEach(t => { %>
+          //       <p><%=t%></p>
+          //     <% }) %>
+          //   `,{p:content.content})
+          // }
+          //
+          // if (content.type === 'h1') {
+          //   // console.log(content.content);
+          //   html += ejs.render(`
+          //     <% h1.forEach(t => { %>
+          //       <h1><%=t%></h1>
+          //     <% }) %>
+          //   `,{h1:content.content})
+          // }
+
+          if (content.type === 'h1' | content.type === 'p') {
+            // console.log(content.type);
             html += ejs.render(`
-              <% p.forEach(t => { %>
-                <p><%=t%></p>
+              <% c.forEach(t => { %>
+                <<%=type%>><%-t%></<%=type%>>
               <% }) %>
-            `,{p:content.content})
+            `,{c:content.content,type:content.type})
           }
         })
         html+='</div>'

@@ -7,16 +7,16 @@ This visualization explores redlining’s lasting impact on homeownership, home 
 []
 
 [div]
+
+###################
 VIDEO DIV
 type:video
-[.content]
-*340449284
-[]
+video: 340449284
+###################
 
-
+###################
 INTRO DIV
 type:content
-id: project-content-intro
 [.content]
 
 type: project-link
@@ -31,5 +31,29 @@ type: p
 *For my thesis project as a student in the Data Visualization MS program at the Parsons School of Design, I explored how housing discrimination shaped who was able to build wealth in housing in the past century. To do this, I tracked changes in the racial composition and real estate markets of neighborhoods within New York City redlining maps in the decades after they were drawn. I then looked at individual neighborhood case studies of communities with similar racial compositions or homeownership markets in 1940, connected these communities to the redlining gradings they received at that time, and followed their changing and diverging housing markets through 2010. I also open up the map for exploration, allowing users to study the redlining map of New York in more detail or investigate potential threads of housing discrimination themselves.
 []
 [] END INTRO DIV
+###################
+
+###################
+type: content
+[.content]
+
+type: h1
+[.content]
+*Process
+[]
+
+type: swiper
+[.content]
+img: process1.png
+text: My <a target='_blank' href='https://ryanabest.com/ms2-2019/wireframe/'>first wireframe mock-up</a> for this project expanded on my <a target='_blank' href='../NYCRedliningPoster/'>NYC Redlining Poster</a> project, introducing redlining through maps with individual neighborhoods represented as&nbsp;dots...
+[]
+
+type: p
+[.content]
+*<b>Data Source:</b> Redlining maps from <a target='_blank' href='https://dsl.richmond.edu/panorama/redlining/'>Mapping Inequality</a> project / Census data from <a target='_blank' href='https://www.nhgis.org/'>IPUMS NGHIS</a> / Building images from <a target='_blank' href='http://nycma.lunaimaging.com/luna/servlet'>NYC Municipal Archives</a> and <a target='_blank' href='https://developers.google.com/maps/documentation/streetview/intro'>Google Street View Static&nbsp;API</a>
+[]
 
 []
+###################
+
+[] END DIV LIST
