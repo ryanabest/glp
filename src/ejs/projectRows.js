@@ -16,7 +16,7 @@ projectRows.forEach(r => {
         <h1 class="eyebrow">--<%=eyebrow%>--</h1>
         <p><%=title%></p>
         </div>
-        <a <% if (url) { %> target="_blank" href="<%=url%>" <% } else { %> <a href="work/<%=folder%>/" <% } %> class="project-img-link"><img alt="<%=title%>" src="assets/work/<%=folder%>/assets/preview.png"/></a>
+        <a <% if (url) { %> target="_blank" href="<%=url%>" <% } else { %> <a href="work/<%=folder%>/" <% } %> class="project-img-link"><img alt="<%=title%>" src="assets/work/<%=folder%>/preview.png"/></a>
 
       </div>
     </div>

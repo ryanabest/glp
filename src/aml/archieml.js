@@ -5,6 +5,7 @@ const amlJSON  = 'src/aml/json/'
 fs.readdir(amlJSON, (err,files) => {
   files.forEach(file => {
     let projectAML = JSON.parse(fs.readFileSync(amlJSON+file));
+    let subfolder = projectAML.subfolder;
     let title = projectAML.title[0].value;
 
     let html = `
@@ -15,10 +16,10 @@ fs.readdir(amlJSON, (err,files) => {
         <!-- inject:css -->
         <!-- endinject -->
         <!--[/htmlclean-protect]-->
-        <%- include('../../_partials/meta.html',{title:'`+title+`'}) %>
+        <%- include('../../../_partials/meta.html',{title:'`+title+`'}) %>
       </head>
       <body>
-        <%- include('../../_partials/header.html',{logo: '../../assets/logo.png', work: ' active', about:''}) %>
+        <%- include('../../../_partials/header.html',{logo: '../../../assets/logo.png', work: ' active', about:''}) %>
 
         <div class="project-content" id="project-content-intro">
         `
@@ -67,6 +68,20 @@ fs.readdir(amlJSON, (err,files) => {
             `,{link:content.content})
           }
 
+          if (content.type === 'swiper') {
+            html += `<div class="swiper-container">
+                     <div class="swiper-wrapper">`;
+            html += ejs.render(`
+              <% slide.forEach(t => { %>
+                <div class="swiper-slide"><img src="assets/process/<%=t.img%>"/><p class="process-text"><%-t.text%></p></div>
+              <% }) %>
+            `,{slide:content.content})
+
+
+            html += `</div>
+                     </div>`;
+          }
+
           // if (content.type === 'p') {
           //   // console.log(content.content);
           //   html += ejs.render(`
@@ -99,7 +114,7 @@ fs.readdir(amlJSON, (err,files) => {
     })
 
     html+=`
-        <%- include('../../_partials/footer.html') %>
+        <%- include('../../../_partials/footer.html') %>
 
         <!--[htmlclean-protect]-->
         <!-- inject:js -->
@@ -109,7 +124,11 @@ fs.readdir(amlJSON, (err,files) => {
     </html>
     `;
 
-    fs.writeFileSync('src/work/'+file.replace('.json','')+'/index.html',html);
+    if (!fs.existsSync(`src/work/${subfolder}`)) { fs.mkdirSync(`src/work/${subfolder}`); }
+
+    if (!fs.existsSync(`src/work/${subfolder}${file.replace('.json','')}`)) { fs.mkdirSync(`src/work/${subfolder}${file.replace('.json','')}`); }
+
+    fs.writeFileSync(`src/work/${subfolder}${file.replace('.json','')}/index.html`,html);
   })
 })
 
