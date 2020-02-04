@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryanabest/portfolio.git"
+    "url": "git+https://github.com/ryanabest/glp.git"
   },
   "author": "Ryan Best",
   "license": "ISC",
@@ -27,6 +27,7 @@
     "ejs": "^2.6.2",
     "fs": "0.0.1-security",
     "fs-extra": "^8.1.0",
+    "gh-pages": "^2.2.0",
     "gulp": "^4.0.2",
     "gulp-archieml": "^1.1.0",
     "gulp-clean-css": "^4.2.0",

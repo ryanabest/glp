@@ -169,8 +169,7 @@ gulp.task('inject:distAll', gulp.series('inject:distWork'));
 gulp.task('build', gulp.series('inject:distAll'));
 
 gulp.task('deploy', gulp.series('build',function() {
-  return gulp.src('./dist/**/*')
-    .pipe(ghPages());
+  return ghpages.publish('dist', function(err) {});
 }));
 
 gulp.task('clean', function () {
@@ -180,3 +179,5 @@ gulp.task('clean', function () {
 gulp.task('aml', () => gulp.src('src/aml/*.aml')
   .pipe(archieml())
   .pipe(gulp.dest('src/aml/json/')));
+
+var ghpages = require('gh-pages');
