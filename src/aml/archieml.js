@@ -10,7 +10,9 @@ fs.readdir(amlJSON, (err,files) => {
     const title = projectAML.title;
     const project = _.find(projects,d=>d.title===title)
     const folder = project.folder;
-    const filePathRel = '../../../';
+    let filePathRel = '../';
+    folder.split('/').forEach(()=> {filePathRel += '../';});
+    let swiper = false;
 
     let html = `
     <!DOCTYPE html>
@@ -69,18 +71,25 @@ fs.readdir(amlJSON, (err,files) => {
           }
 
           if (content.type === 'swiper') {
+            swiper = true;
             html += `<div class="swiper-container">
                      <div class="swiper-wrapper">`;
             html += ejs.render(`
               <% slide.forEach(t => { %>
-                <div class="swiper-slide"><img src=/assets/<%=t.img%>><p class="process-text"><%-t.text%></p></div>
+                <div class="swiper-slide"><img src=<%=filePathRel+'assets/work/'+folder+'/'+t.img%>><p class="process-text"><%-t.text%></p></div>
               <% }) %>
-            `,{slide:content.content})
+            `,{slide:content.content,filePathRel:filePathRel,folder:folder})
 
             // "/assets/process/<%=t.img%>"
 
             html += `</div>
-                     </div>`;
+                     <div class="swiper-pagination"></div>
+                     <div class="swiper-button-prev"></div>
+                     <div class="swiper-button-next"></div>
+                     </div>`
+
+            // html += ejs.render(`<script src="<%=filePathRel%>js/swiper.min.js"></script>`,{filePathRel:filePathRel})
+
           }
 
           // if (content.type === 'p') {
@@ -120,7 +129,28 @@ fs.readdir(amlJSON, (err,files) => {
         <!--[htmlclean-protect]-->
         <!-- inject:js -->
         <!-- endinject -->
-        <!--[/htmlclean-protect]-->
+        <!--[/htmlclean-protect]-->`
+    if (swiper) {
+      html += `<script>
+      var mySwiper = new Swiper ('.swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      })
+    </script>`
+    }
+    html +=`
     </body>
     </html>
     `;

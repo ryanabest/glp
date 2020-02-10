@@ -34,6 +34,7 @@ type: p
 ###################
 
 ###################
+BODY CONTENT
 type: content
 [.content]
 
@@ -44,8 +45,13 @@ type: h1
 
 type: swiper
 [.content]
-img: process1.png
+
+img: process/process1.png
 text: My <a target='_blank' href='https://ryanabest.com/ms2-2019/wireframe/'>first wireframe mock-up</a> for this project expanded on my <a target='_blank' href='../NYCRedliningPoster/'>NYC Redlining Poster</a> project, introducing redlining through maps with individual neighborhoods represented as&nbsp;dots...
+
+img: process/process2.png
+text: ...which I would then bring off the map into a <a target='_blank' href='https://www.gapminder.org/tools/'>Gap Minder</a> inspired scatterplot that displayed insights for the racial composition, homeownership, and home value across the city as&nbsp;a&nbsp;whole.
+
 []
 
 type: p

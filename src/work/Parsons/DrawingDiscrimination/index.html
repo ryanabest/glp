@@ -39,9 +39,14 @@
             <div class="swiper-container">
                      <div class="swiper-wrapper">
               
-                <div class="swiper-slide"><img src=/assets/process1.png><p class="process-text">My <a target='_blank' href='https://ryanabest.com/ms2-2019/wireframe/'>first wireframe mock-up</a> for this project expanded on my <a target='_blank' href='../NYCRedliningPoster/'>NYC Redlining Poster</a> project, introducing redlining through maps with individual neighborhoods represented as&nbsp;dots...</p></div>
+                <div class="swiper-slide"><img src=../../../assets/work/Parsons/DrawingDiscrimination/process/process1.png><p class="process-text">My <a target='_blank' href='https://ryanabest.com/ms2-2019/wireframe/'>first wireframe mock-up</a> for this project expanded on my <a target='_blank' href='../NYCRedliningPoster/'>NYC Redlining Poster</a> project, introducing redlining through maps with individual neighborhoods represented as&nbsp;dots...</p></div>
+              
+                <div class="swiper-slide"><img src=../../../assets/work/Parsons/DrawingDiscrimination/process/process2.png><p class="process-text">...which I would then bring off the map into a <a target='_blank' href='https://www.gapminder.org/tools/'>Gap Minder</a> inspired scatterplot that displayed insights for the racial composition, homeownership, and home value across the city as&nbsp;a&nbsp;whole.</p></div>
               
             </div>
+                     <div class="swiper-pagination"></div>
+                     <div class="swiper-button-prev"></div>
+                     <div class="swiper-button-next"></div>
                      </div>
               
                 <p><b>Data Source:</b> Redlining maps from <a target='_blank' href='https://dsl.richmond.edu/panorama/redlining/'>Mapping Inequality</a> project / Census data from <a target='_blank' href='https://www.nhgis.org/'>IPUMS NGHIS</a> / Building images from <a target='_blank' href='http://nycma.lunaimaging.com/luna/servlet'>NYC Municipal Archives</a> and <a target='_blank' href='https://developers.google.com/maps/documentation/streetview/intro'>Google Street View Static&nbsp;API</a></p>
@@ -52,7 +57,24 @@
         <!--[htmlclean-protect]-->
         <!-- inject:js -->
         <!-- endinject -->
-        <!--[/htmlclean-protect]-->
+        <!--[/htmlclean-protect]--><script>
+      var mySwiper = new Swiper ('.swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      })
+    </script>
     </body>
     </html>
     
