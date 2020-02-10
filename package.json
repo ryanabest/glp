@@ -42,5 +42,7 @@
     "indian-ocean": "^3.1.0",
     "spelunk": "^0.5.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "underscore": "^1.9.2"
+  }
 }

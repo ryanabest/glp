@@ -173,7 +173,7 @@ gulp.task('deploy', gulp.series('build',function() {
 }));
 
 gulp.task('clean', function () {
-  return del([paths.tmp, paths.dist]);
+  return del([paths.tmp, paths.dist, 'src/work/**']);
 });
 
 gulp.task('aml', () => gulp.src('src/aml/*.aml')
