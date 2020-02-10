@@ -126,7 +126,6 @@ fs.readdir(amlJSON, (err,files) => {
     `;
 
     fs.mkdirSync(`src/work/${folder}`,{recursive: true});
-    console.log(folder);
     fs.writeFileSync(`src/work/${folder}/index.html`,html,{recursive: true});
   })
 })
